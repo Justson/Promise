@@ -8,6 +8,7 @@ public class Promise<T> implements IPromise<T> {
 
 
 	private Action<T> action;
+	private T t;
 	private static final Executor mExecutor = Executors.newFixedThreadPool(3);
 
 
@@ -24,16 +25,15 @@ public class Promise<T> implements IPromise<T> {
 		return null;
 	}
 
+
 	@Override
-	public <R> IPromise<R> then(Function<T, R> t) {
-		return new PromiseLinker<R>(new Action<R>() {
-			@Override
-			public R action() {
-				return t.apply(action.action());
-			}
-		});
+	public <R> IPromise<R> then(Function<? super T, ? extends R> t) {
+		return (IPromise<R>) new PromiseLinker<T, R>(this, t);
 	}
 
+	public static <T> IPromise<T> onAssembly(Promise<T> source) {
+		return source;
+	}
 
 	@Override
 	public T await() {
@@ -46,7 +46,7 @@ public class Promise<T> implements IPromise<T> {
 	}
 
 	@Override
-	public void onFinally() {
+	public void onFinally(Runnable runnable) {
 
 	}
 }

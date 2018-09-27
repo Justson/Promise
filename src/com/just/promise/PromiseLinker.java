@@ -6,13 +6,19 @@ package com.just.promise;
  * @since 1.0.0
  */
 
-class PromiseLinker<T> extends Promise<T> {
+class PromiseLinker<T, U> extends Promise<T> {
 
+	private Function<? super T, ? extends U> t;
+	private IPromise<T> mPromise;
 
-	PromiseLinker(Action<T> t) {
-		super(t);
+	PromiseLinker(IPromise<T> iPromise, Function<? super T, ? extends U> t) {
+		this.t = t;
+		this.mPromise = iPromise;
 	}
 
+	U call(T t) {
+		return this.t.apply(t);
+	}
 
 
 }
