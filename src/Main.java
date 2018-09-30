@@ -33,6 +33,6 @@ public class Main {
 
 					}
 				});
-//		System.out.print(iPromise.await());
+		System.out.print(iPromise.await());
 	}
 }
