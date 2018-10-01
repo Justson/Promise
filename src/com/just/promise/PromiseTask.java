@@ -7,4 +7,5 @@ package com.just.promise;
  */
 
 public class PromiseTask {
+
 }
