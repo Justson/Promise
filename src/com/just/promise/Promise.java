@@ -3,12 +3,19 @@ package com.just.promise;
 import java.util.List;
 import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
+import java.util.concurrent.atomic.AtomicInteger;
 
 public class Promise<T> {
 
 
 	private Action<T> action;
+
+	public static final int STATE_PEDDING = 1;
+	public static final int STATE_RESOLUED = 2;
+	public static final int STATE_REJECTED = 3;
+	private AtomicInteger state = new AtomicInteger(STATE_PEDDING);
 	private static final Executor mExecutor = Executors.newFixedThreadPool(3);
+
 
 	private Promise(Action<T> t) {
 		this.action = t;
