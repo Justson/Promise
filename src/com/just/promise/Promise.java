@@ -30,6 +30,10 @@ public class Promise<T> {
 		});
 	}
 
+	public static final <T> Promise<T> reject(T t) {
+		return null;
+	}
+
 	public static final <T> Promise<List<T>> all(T... t) {
 		// todo
 		return null;
