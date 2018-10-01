@@ -1,4 +1,3 @@
-import com.just.promise.IPromise;
 import com.just.promise.Function;
 import com.just.promise.Promise;
 

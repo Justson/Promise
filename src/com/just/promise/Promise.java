@@ -4,7 +4,7 @@ import java.util.List;
 import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
 
-public class Promise<T> implements IPromise<T> {
+public class Promise<T> {
 
 
 	private Action<T> action;
@@ -14,7 +14,7 @@ public class Promise<T> implements IPromise<T> {
 		this.action = t;
 	}
 
-	public static final <T> IPromise<T> resolve(T t) {
+	public static final <T> Promise<T> resolve(T t) {
 		return new Promise<T>(new Action<T>() {
 			@Override
 			public T action() {
@@ -23,13 +23,12 @@ public class Promise<T> implements IPromise<T> {
 		});
 	}
 
-	public static final <T> IPromise<List<T>> all(T... t) {
+	public static final <T> Promise<List<T>> all(T... t) {
 		// todo
 		return null;
 	}
 
-	@Override
-	public <R> IPromise<R> then(Function<T, R> t) {
+	public <R> Promise<R> then(Function<T, R> t) {
 		return new Promise<R>(new Action<R>() {
 			@Override
 			public R action() {
@@ -38,7 +37,6 @@ public class Promise<T> implements IPromise<T> {
 		});
 	}
 
-	@Override
 	public T await() {
 		return action.action();
 	}
