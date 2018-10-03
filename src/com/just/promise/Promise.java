@@ -31,6 +31,7 @@ public class Promise<T> {
 	}
 
 	public static final <T> Promise<T> reject(T t) {
+		// todo
 		return null;
 	}
 
@@ -46,6 +47,10 @@ public class Promise<T> {
 				return t.apply(mTaskCallble.call());
 			}
 		});
+	}
+
+	public void done() {
+
 	}
 
 	public T await() {
