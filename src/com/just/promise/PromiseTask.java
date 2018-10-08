@@ -6,7 +6,7 @@ package com.just.promise;
  * @since 1.0.0
  */
 
-public abstract class PromiseTask<V> implements TaskCallble<V> {
+public abstract class PromiseTask<V> implements TaskCallable<V> {
 
 	private PromiseTask<?> promiseTask;
 

@@ -8,6 +8,6 @@ import java.util.concurrent.Callable;
  * @since 1.0.0
  */
 
-public interface TaskCallble<V> extends Callable<V> {
+public interface TaskCallable<V> extends Callable<V> {
     V call();
 }

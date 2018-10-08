@@ -8,7 +8,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 public class Promise<T> {
 
 
-	private TaskCallble<T> mTaskCallble;
+	private TaskCallable<T> mTaskCallable;
 
 	public static final int STATE_PEDDING = 1;
 	public static final int STATE_RESOLUED = 2;
@@ -17,12 +17,12 @@ public class Promise<T> {
 	private static final Executor mExecutor = Executors.newFixedThreadPool(3);
 
 
-	private Promise(TaskCallble<T> t) {
-		this.mTaskCallble = t;
+	private Promise(TaskCallable<T> t) {
+		this.mTaskCallable = t;
 	}
 
 	public static final <T> Promise<T> resolve(T t) {
-		return new Promise<T>(new TaskCallble<T>() {
+		return new Promise<T>(new TaskCallable<T>() {
 			@Override
 			public T call() {
 				return t;
@@ -41,10 +41,10 @@ public class Promise<T> {
 	}
 
 	public <R> Promise<R> then(Function<T, R> t) {
-		return new Promise<R>(new TaskCallble<R>() {
+		return new Promise<R>(new TaskCallable<R>() {
 			@Override
 			public R call() {
-				return t.apply(mTaskCallble.call());
+				return t.apply(mTaskCallable.call());
 			}
 		});
 	}
@@ -54,6 +54,6 @@ public class Promise<T> {
 	}
 
 	public T await() {
-		return mTaskCallble.call();
+		return mTaskCallable.call();
 	}
 }
